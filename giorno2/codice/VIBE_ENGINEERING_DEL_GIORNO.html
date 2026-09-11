@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LipariBank | Dashboard</title>
+    <link rel="stylesheet" href="dist/main.css" />
+  </head>
+  <body>
+    <a class="bank-skip-link" href="#dashboard">Vai al contenuto principale</a>
+    <div class="bank-app">
+      <aside class="bank-sidebar" aria-label="Navigazione principale">
+        <div class="bank-sidebar__brand">
+          <span class="bank-sidebar__mark" aria-hidden="true">L</span>
+          <span>LipariBank</span>
+        </div>
+
+        <nav class="bank-sidebar__nav" aria-label="Menu account">
+          <ul class="bank-sidebar__list">
+            <li>
+              <a
+                class="bank-sidebar__link bank-sidebar__link--active"
+                href="#dashboard"
+                aria-current="page"
+              >
+                <svg
+                  class="bank-sidebar__icon"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a class="bank-sidebar__link" href="#conto">
+                <svg
+                  class="bank-sidebar__icon"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3 10h18M7 15h3" />
+                </svg>
+                <span>Il mio conto</span>
+              </a>
+            </li>
+            <li>
+              <a class="bank-sidebar__link" href="#movimenti">
+                <svg
+                  class="bank-sidebar__icon"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M7 7h13l-3-3M17 17H4l3 3M20 7l-3 3M4 17l3-3" />
+                </svg>
+                <span>Movimenti</span>
+              </a>
+            </li>
+            <li>
+              <a class="bank-sidebar__link" href="#polizze">
+                <svg
+                  class="bank-sidebar__icon"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 21s8-4 8-10V5l-8-3-8 3v6c0 6 8 10 8 10Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+                <span>Polizze</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="bank-sidebar__footer">Servizio clienti · 800 123 456</div>
+      </aside>
+
+      <div class="bank-main">
+        <header class="bank-header">
+          <h1 class="bank-header__title">Panoramica</h1>
+          <div class="bank-header__user">
+            <div>
+              <span class="bank-header__user-name">Giulia Bianchi</span>
+              <span class="bank-header__user-role">Account personale</span>
+            </div>
+            <span class="bank-header__avatar" aria-hidden="true">GB</span>
+          </div>
+        </header>
+
+        <main class="bank-content" id="dashboard" tabindex="-1">
+          <section class="bank-page-intro" aria-labelledby="welcome-title">
+            <span class="bank-page-intro__eyebrow">Area personale</span>
+            <h2 class="bank-page-intro__title" id="welcome-title">
+              Bentornata, Giulia
+            </h2>
+            <p class="bank-page-intro__text">
+              Ecco una sintesi aggiornata delle tue finanze.
+            </p>
+          </section>
+
+          <section class="bank-widgets" aria-label="Riepilogo finanziario">
+            <article class="bank-widget" id="conto">
+              <div class="bank-widget__header">
+                <h3 class="bank-widget__heading">
+                  <svg
+                    class="bank-widget__icon"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M3 10h18M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18M12 4l9 6H3l9-6Z"
+                    />
+                  </svg>
+                  Saldo
+                </h3>
+                <span class="bank-widget__label">Conto corrente</span>
+              </div>
+              <p class="bank-widget__value">€ 12.480,50</p>
+              <p class="bank-widget__meta">
+                <span class="bank-widget__trend">+2,4%</span> rispetto al mese
+                scorso
+              </p>
+              <a class="bank-widget__action" href="account.html"
+                >Vedi dettaglio</a
+              >
+            </article>
+
+            <article class="bank-widget" id="movimenti">
+              <div class="bank-widget__header">
+                <h3 class="bank-widget__heading">
+                  <svg
+                    class="bank-widget__icon"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M4 4v16h16M7 15l3-3 3 2 5-6" />
+                  </svg>
+                  Movimenti
+                </h3>
+                <span class="bank-widget__label">Questo mese</span>
+              </div>
+              <p class="bank-widget__value">24</p>
+              <p class="bank-widget__meta">Ultima operazione: oggi</p>
+              <a class="bank-widget__action" href="transactions.html"
+                >Vedi movimenti</a
+              >
+            </article>
+
+            <article class="bank-widget" id="polizze">
+              <div class="bank-widget__header">
+                <h3 class="bank-widget__heading">
+                  <svg
+                    class="bank-widget__icon"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M12 21s8-4 8-10V5l-8-3-8 3v6c0 6 8 10 8 10Z" />
+                    <path d="M9 12h6M12 9v6" />
+                  </svg>
+                  Polizze
+                </h3>
+                <span class="bank-widget__label">Attive</span>
+              </div>
+              <p class="bank-widget__value">3</p>
+              <p class="bank-widget__meta">Prossima scadenza: 18 giu 2025</p>
+              <a class="bank-widget__action" href="policy-form.html"
+                >Gestisci polizze</a
+              >
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
