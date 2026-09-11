@@ -1,0 +1,12 @@
+{
+  "name": "liparibank-day1-broken",
+  "version": "1.0.0",
+  "description": "LipariBank — progetto frontend con 3 bug da correggere",
+  "scripts": {
+    "build:css": "sass scss/main.scss dist/main.css",
+    "dev": "sass --watch scss/main.scss dist/main.css"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accedi - LipariBank</title>
+    <link rel="stylesheet" href="dist/main.css" />
+  </head>
+  <body>
+    <main class="login-page">
+      <form class="login-form" action="dashboard.html" method="get">
+        <fieldset>
+          <legend>Accedi al tuo conto</legend>
+
+          <div class="login-form__field">
+            <label class="login-form__label" for="email">Email</label>
+            <input
+              class="login-form__input"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              aria-describedby="email-hint"
+              required
+            />
+            <small id="email-hint"
+              >Inserisci l'indirizzo email associato al conto.</small
+            >
+          </div>
+
+          <div class="login-form__field">
+            <label class="login-form__label" for="password">Password</label>
+            <input
+              class="login-form__input"
+              type="password"
+              id="password"
+              name="password"
+              minlength="8"
+              autocomplete="current-password"
+              aria-describedby="password-hint"
+              required
+            />
+            <small id="password-hint"
+              >La password deve contenere almeno 8 caratteri.</small
+            >
+          </div>
+
+          <button class="login-form__submit" type="submit">Accedi</button>
+        </fieldset>
+      </form>
+    </main>
+  </body>
+</html>

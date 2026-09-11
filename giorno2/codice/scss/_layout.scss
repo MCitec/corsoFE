@@ -1,0 +1,476 @@
+// =============================================================================
+// _layout.scss — Layout strutturale LipariBank
+// =============================================================================
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $font-size-base;
+  font-family: $font-family;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: $color-bg;
+  color: $color-text;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  min-height: 72px;
+  padding: $spacing-md $spacing-xl;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+}
+
+.app-header__logo img {
+  width: 140px;
+  height: auto;
+}
+
+.app-header__nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+
+  a {
+    color: $color-text;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover,
+    &[aria-current="page"] {
+      color: $color-secondary;
+    }
+  }
+}
+
+.app-header__user {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  color: $color-text;
+  font-size: $font-size-sm;
+}
+
+.app-header__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: $color-primary;
+  color: $color-white;
+  font-size: $font-size-xs;
+  font-weight: 600;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: calc(100vh - 72px);
+}
+
+.app-sidebar {
+  padding: $spacing-xl $spacing-lg;
+  background: $sidebar-bg;
+  color: $color-white;
+}
+
+.app-sidebar__title {
+  margin-bottom: $spacing-lg;
+  color: rgba($color-white, 0.7);
+  font-size: $font-size-xs;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.app-sidebar__nav {
+  display: grid;
+  gap: $spacing-xs;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.app-sidebar__link {
+  display: block;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+  color: rgba($color-white, 0.78);
+  font-size: $font-size-sm;
+  text-decoration: none;
+
+  &:hover,
+  &--active {
+    background: rgba($color-white, 0.12);
+    color: $color-white;
+  }
+}
+
+.app-main {
+  min-width: 0;
+  padding: $spacing-xl;
+}
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: $spacing-xl;
+}
+
+.transactions-section {
+  padding: $spacing-lg;
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+
+  h2 {
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-xl;
+  }
+}
+
+.transactions-section__table-wrapper {
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: $spacing-md;
+  }
+
+  .app-header__nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: $spacing-sm;
+  }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .app-sidebar {
+    display: none;
+  }
+
+  .app-main {
+    padding: $spacing-md;
+  }
+
+  .widget-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .widget-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bank-skip-link {
+  background: $color-secondary;
+  color: $color-primary;
+  font-weight: 700;
+  left: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  position: fixed;
+  top: -100px;
+  z-index: 1000;
+
+  &:focus {
+    top: $spacing-md;
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// =============================================================================
+// App shell — sidebar + main
+// =============================================================================
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+// -----------------------------------------------------------------------------
+// Sidebar
+// -----------------------------------------------------------------------------
+
+.sidebar {
+  width: $sidebar-width;
+  background: $sidebar-bg;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.sidebar__logo {
+  padding: $spacing-xl $spacing-lg;
+  border-bottom: 1px solid rgba($color-white, 0.1);
+
+  img {
+    height: 36px;
+    width: auto;
+  }
+}
+
+.sidebar__nav {
+  flex: 1;
+  padding: $spacing-lg 0;
+}
+
+.sidebar-nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav__item {
+  margin-bottom: $spacing-xs;
+}
+
+.sidebar-nav__link {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-lg;
+  color: rgba($color-white, 0.7);
+  text-decoration: none;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  transition: all $transition-fast;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    color: $color-white;
+    background: rgba($color-white, 0.08);
+  }
+
+  .nav-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+  }
+}
+
+.sidebar-nav__link--active {
+  color: $color-white;
+  background: rgba($color-white, 0.12);
+  border-left-color: $color-accent;
+}
+
+.sidebar__footer {
+  padding: $spacing-lg;
+  border-top: 1px solid rgba($color-white, 0.1);
+  font-size: $font-size-sm;
+  color: rgba($color-white, 0.5);
+}
+
+// -----------------------------------------------------------------------------
+// Main content area
+// -----------------------------------------------------------------------------
+
+.main {
+  flex: 1;
+  margin-left: $sidebar-width;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  padding: $spacing-md $spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: $shadow-sm;
+}
+
+.topbar__title {
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.topbar__user {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.topbar__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: $color-secondary;
+  color: $color-white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size-sm;
+  font-weight: 600;
+}
+
+.page-content {
+  flex: 1;
+  padding: $spacing-xl;
+}
+
+// =============================================================================
+// Grid utility
+// =============================================================================
+
+.bank-grid {
+  display: grid;
+  gap: $spacing-lg;
+
+  &--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.bank-grid--main {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: $spacing-lg;
+}
+
+.bank-spacing {
+  display: block;
+}
+
+.bank-spacing--mb-lg {
+  margin-bottom: $spacing-lg;
+}
+.bank-spacing--mb-md {
+  margin-bottom: $spacing-md;
+}
+.bank-spacing--mb-xl {
+  margin-bottom: $spacing-xl;
+}
+.bank-spacing--mt-lg {
+  margin-top: $spacing-lg;
+}
+
+// =============================================================================
+// Assignment dashboard shell
+// =============================================================================
+
+.bank-app {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.bank-sidebar {
+  background: $color-primary;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: $spacing-lg $spacing-md;
+}
+
+.bank-main {
+  min-width: 0;
+  background: $color-bg;
+}
+
+.bank-header {
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+  min-height: 76px;
+  padding: $spacing-md $spacing-xl;
+}
+
+.bank-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: $spacing-xl;
+}
+
+.bank-sidebar__link:focus-visible,
+.bank-widget__action:focus-visible,
+.bank-skip-link:focus-visible {
+  outline: 3px solid $color-secondary;
+  outline-offset: 3px;
+}
+
+@media (max-width: #{$bp-md - 1px}) {
+  .bank-app {
+    display: block;
+  }
+
+  .bank-sidebar {
+    min-height: auto;
+    padding: $spacing-sm $spacing-md;
+  }
+
+  .bank-sidebar__brand {
+    justify-content: center;
+  }
+
+  .bank-sidebar__nav {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .bank-header {
+    padding: $spacing-md;
+  }
+
+  .bank-content {
+    padding: $spacing-lg $spacing-md;
+  }
+}

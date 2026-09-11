@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Mio Conto — LipariBank</title>
+  <link rel="stylesheet" href="dist/main.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <aside class="sidebar">
+      <div class="sidebar__logo">
+        <img src="assets/logo.svg" alt="LipariBank">
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Navigazione principale">
+        <ul class="sidebar-nav__list">
+
+          <li class="sidebar-nav__item">
+            <a href="dashboard.html" class="sidebar-nav__link">
+              <span class="nav-icon">🏠</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li class="sidebar-nav__item">
+            <a href="transactions.html" class="sidebar-nav__link">
+              <span class="nav-icon">💳</span>
+              <span>Transazioni</span>
+            </a>
+          </li>
+
+          <li class="sidebar-nav__item">
+            <a href="account.html" class="sidebar-nav__link sidebar-nav__link--active" aria-current="page">
+              <span class="nav-icon">👤</span>
+              <span>Il Mio Conto</span>
+            </a>
+          </li>
+
+          <li class="sidebar-nav__item">
+            <a href="policy-form.html" class="sidebar-nav__link">
+              <span class="nav-icon">📋</span>
+              <span>Polizze</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <div class="sidebar__footer">
+        © 2024 LipariBank S.p.A.
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         MAIN
+         ===================================================================== -->
+    <main class="main">
+
+      <!-- Topbar -->
+      <header class="topbar">
+        <h1 class="topbar__title">Il Mio Conto</h1>
+        <div class="topbar__user">
+          <span>Mario Rossi</span>
+          <div class="topbar__avatar">MR</div>
+        </div>
+      </header>
+
+      <!-- Contenuto pagina -->
+      <div class="page-content">
+
+        <!-- Intestazione conto -->
+        <div class="bank-grid bank-grid--cols-2 bank-spacing bank-spacing--mb-xl">
+
+          <div class="bank-card">
+            <div class="bank-card__header">
+              <h2 class="bank-card__title">Dati Anagrafici</h2>
+              <button class="bank-button bank-button--outline bank-button--sm">✏️ Modifica</button>
+            </div>
+            <div class="account-info-grid">
+              <div class="account-info-item">
+                <label>Nome</label>
+                <span>Mario</span>
+              </div>
+              <div class="account-info-item">
+                <label>Cognome</label>
+                <span>Rossi</span>
+              </div>
+              <div class="account-info-item">
+                <label>Data di nascita</label>
+                <span>12 marzo 1985</span>
+              </div>
+              <div class="account-info-item">
+                <label>Codice fiscale</label>
+                <span>RSSMRA85C12F205Y</span>
+              </div>
+              <div class="account-info-item">
+                <label>Email</label>
+                <span>mario.rossi@email.it</span>
+              </div>
+              <div class="account-info-item">
+                <label>Telefono</label>
+                <span>+39 328 1234567</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bank-card">
+            <div class="bank-card__header">
+              <h2 class="bank-card__title">Dettagli Conto</h2>
+            </div>
+            <div class="account-info-grid">
+              <div class="account-info-item">
+                <label>IBAN</label>
+                <span>IT60 X054 2811 1010 0000 0123 456</span>
+              </div>
+              <div class="account-info-item">
+                <label>BIC / SWIFT</label>
+                <span>LIPAITM1XXX</span>
+              </div>
+              <div class="account-info-item">
+                <label>Tipo conto</label>
+                <span>Conto Corrente Premium</span>
+              </div>
+              <div class="account-info-item">
+                <label>Apertura conto</label>
+                <span>15 settembre 2018</span>
+              </div>
+              <div class="account-info-item">
+                <label>Filiale</label>
+                <span>LipariBank Milano Centro</span>
+              </div>
+              <div class="account-info-item">
+                <label>Saldo attuale</label>
+                <span style="color:#27ae60; font-weight:700;">€ 12.450,80</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sicurezza e impostazioni -->
+        <div class="bank-grid bank-grid--cols-2 bank-spacing bank-spacing--mb-xl">
+
+          <div class="bank-card">
+            <div class="bank-card__header">
+              <h2 class="bank-card__title">Sicurezza</h2>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #dde1e7;">
+                <div>
+                  <div style="font-weight:500; font-size:14px;">Password di accesso</div>
+                  <div style="font-size:12px; color:#7f8c8d;">Ultima modifica: 3 mesi fa</div>
+                </div>
+                <button class="bank-button bank-button--outline bank-button--sm">Cambia</button>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #dde1e7;">
+                <div>
+                  <div style="font-weight:500; font-size:14px;">Autenticazione a due fattori</div>
+                  <div style="font-size:12px; color:#7f8c8d;">Attiva via SMS</div>
+                </div>
+                <span class="badge badge--success">Attiva</span>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #dde1e7;">
+                <div>
+                  <div style="font-weight:500; font-size:14px;">Notifiche transazioni</div>
+                  <div style="font-size:12px; color:#7f8c8d;">Email + Push</div>
+                </div>
+                <span class="badge badge--success">Attive</span>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0;">
+                <div>
+                  <div style="font-weight:500; font-size:14px;">Sessioni attive</div>
+                  <div style="font-size:12px; color:#7f8c8d;">1 dispositivo connesso</div>
+                </div>
+                <button class="bank-button bank-button--ghost bank-button--sm">Gestisci</button>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="bank-card">
+            <div class="bank-card__header">
+              <h2 class="bank-card__title">Preferenze</h2>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label>Lingua interfaccia</label>
+                <select class="form-control">
+                  <option selected>Italiano</option>
+                  <option>English</option>
+                  <option>Deutsch</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label>Valuta di visualizzazione</label>
+                <select class="form-control">
+                  <option selected>Euro (€)</option>
+                  <option>Dollaro ($)</option>
+                  <option>Sterlina (£)</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label>Formato data</label>
+                <select class="form-control">
+                  <option selected>GG/MM/AAAA</option>
+                  <option>MM/DD/YYYY</option>
+                  <option>AAAA-MM-GG</option>
+                </select>
+              </div>
+
+              <button class="bank-button bank-button--primary">Salva preferenze</button>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Zona pericolosa -->
+        <div class="bank-card">
+          <div class="bank-card__header">
+            <h2 class="bank-card__title" style="color:#e74c3c;">Zona pericolosa</h2>
+          </div>
+          <div class="alert alert--danger" style="margin-bottom:16px;">
+            <span>⚠️</span>
+            <div>Le azioni in questa sezione sono irreversibili. Procedi con cautela.</div>
+          </div>
+          <div style="display:flex; gap:16px;">
+            <button class="bank-button bank-button--ghost bank-button--sm">Scarica tutti i dati</button>
+            <button class="bank-button bank-button--danger bank-button--sm">Chiudi conto</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>

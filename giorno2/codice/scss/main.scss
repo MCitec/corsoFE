@@ -1,0 +1,9 @@
+// =============================================================================
+// main.scss — Entry point SCSS LipariBank
+// Ordine di import: variabili → mixin → layout → componenti
+// =============================================================================
+
+@import 'variables';
+@import 'mixins';
+@import 'layout';
+@import 'components';
