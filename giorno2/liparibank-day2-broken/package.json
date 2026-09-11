@@ -1,8 +1,0 @@
-{
-  "name": "liparibank-day2-broken",
-  "version": "1.0.0",
-  "description": "LipariBank Day 2 — JavaScript debugging mission",
-  "scripts": {
-    "start": "npx live-server --port=3000"
-  }
-}
