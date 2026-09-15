@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LipariBank - Dashboard</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar__logo">LipariBank</div>
+        <ul class="sidebar__nav">
+          <li><a href="dashboard.html" class="active">Dashboard</a></li>
+          <li><a href="transactions.html">Movimenti</a></li>
+        </ul>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <span class="topbar__title">Dashboard</span>
+          <span class="topbar__user" id="topbarUser">Caricamento...</span>
+        </header>
+        <div class="content">
+          <section class="stats-grid">
+            <article class="card card--accent">
+              <div class="card__label">Saldo disponibile</div>
+              <div class="card__value" id="statBalance">Caricamento...</div>
+              <div class="card__sub" id="statIban"></div>
+            </article>
+            <article class="card">
+              <div class="card__label">Entrate</div>
+              <div class="card__value" id="statCredits">Caricamento...</div>
+              <div class="card__sub" id="statCreditsCount"></div>
+            </article>
+            <article class="card">
+              <div class="card__label">Uscite</div>
+              <div class="card__value" id="statDebits">Caricamento...</div>
+              <div class="card__sub" id="statDebitsCount"></div>
+            </article>
+          </section>
+          <section class="card">
+            <div class="section-header">
+              <h2 class="section-title">Movimenti recenti</h2>
+              <a href="transactions.html">Vedi tutti</a>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Descrizione</th>
+                    <th>Categoria</th>
+                    <th>Importo</th>
+                  </tr>
+                </thead>
+                <tbody id="recentBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="api.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

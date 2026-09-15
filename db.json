@@ -1,0 +1,23 @@
+{
+  "transactions": [
+    { "id": 1,  "date": "2024-01-15", "description": "Stipendio gennaio",           "amount":  2800.00, "type": "credit", "category": "Entrata"    },
+    { "id": 2,  "date": "2024-01-14", "description": "Affitto gennaio",             "amount":  -950.00, "type": "debit",  "category": "Casa"       },
+    { "id": 3,  "date": "2024-01-12", "description": "Esselunga — spesa",           "amount":   -87.40, "type": "debit",  "category": "Alimentari" },
+    { "id": 4,  "date": "2024-01-10", "description": "Rimborso spese trasferta",    "amount":   150.00, "type": "credit", "category": "Entrata"    },
+    { "id": 5,  "date": "2024-01-08", "description": "Enel Energia — bolletta",     "amount":  -124.00, "type": "debit",  "category": "Utenze"     },
+    { "id": 6,  "date": "2024-01-07", "description": "Bonus produttività Q4",       "amount":   500.00, "type": "credit", "category": "Entrata"    },
+    { "id": 7,  "date": "2024-01-05", "description": "Netflix abbonamento",         "amount":   -15.99, "type": "debit",  "category": "Svago"      },
+    { "id": 8,  "date": "2024-01-04", "description": "Amazon — ordine #114-789",   "amount":  -239.00, "type": "debit",  "category": "Shopping"   },
+    { "id": 9,  "date": "2024-01-03", "description": "Rimborso assicurazione auto", "amount":   180.00, "type": "credit", "category": "Entrata"    },
+    { "id": 10, "date": "2023-12-31", "description": "Trenitalia Milano-Roma",      "amount":   -68.50, "type": "debit",  "category": "Trasporti"  }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Mario Rossi",
+      "iban": "IT60 X054 2811 1010 0000 0123 456",
+      "balance": 12450.75,
+      "accountType": "Conto Corrente Privato"
+    }
+  ]
+}

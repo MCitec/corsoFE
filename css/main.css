@@ -1,0 +1,284 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: #f0f2f5;
+  color: #2c3e50;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: #1a3c5e;
+}
+
+.sidebar__logo {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sidebar__nav {
+  flex: 1;
+  padding: 12px 0;
+  list-style: none;
+}
+
+.sidebar__nav li a {
+  display: flex;
+  padding: 11px 24px;
+  border-left: 3px solid transparent;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.sidebar__nav li a:hover,
+.sidebar__nav li a.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.sidebar__nav li a.active {
+  border-left-color: #4fc3f7;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.topbar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.topbar__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.topbar__user {
+  color: #888888;
+  font-size: 13px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 32px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  padding: 24px;
+}
+
+.card--accent {
+  color: #fff;
+  background: linear-gradient(135deg, #1a3c5e, #265480);
+}
+
+.card__label {
+  margin-bottom: 6px;
+  color: #888888;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card--accent .card__label,
+.card--accent .card__sub {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card__value {
+  color: #1a3c5e;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card--accent .card__value {
+  color: #fff;
+}
+
+.card__sub {
+  margin-top: 4px;
+  color: #888888;
+  font-size: 13px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.section-header a {
+  color: #1a3c5e;
+  font-size: 13px;
+}
+
+.search-bar {
+  position: relative;
+  width: min(100%, 360px);
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead tr {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e9ecef;
+}
+
+th,
+td {
+  padding: 10px 14px;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #e9ecef;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover,
+tr.row--selected {
+  background: #eef7fc;
+}
+
+.amount--credit {
+  color: #2e7d32;
+  font-weight: 600;
+  text-align: right;
+}
+
+.amount--debit {
+  color: #c62828;
+  font-weight: 600;
+  text-align: right;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #eef1f3;
+  font-size: 12px;
+}
+
+.detail-panel {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  display: none;
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.detail-panel--visible,
+.panel--visible {
+  display: block;
+}
+
+.detail-panel__title {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 8px 16px;
+  font-size: 14px;
+}
+
+.detail-grid dt {
+  color: #888888;
+}
+
+.state-loading {
+  padding: 24px;
+  color: #888888;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 180px;
+  }
+  .topbar,
+  .content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .section-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .search-bar {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
