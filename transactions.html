@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>LipariBank — Movimenti</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar__logo">🏦 LipariBank</div>
+        <ul class="sidebar__nav">
+          <li><a href="dashboard.html">📊 Dashboard</a></li>
+          <li><a href="transactions.html" class="active">📋 Movimenti</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main -->
+      <div class="main">
+        <div class="topbar">
+          <span class="topbar__title">Movimenti</span>
+          <span class="topbar__user" id="topbarUser">—</span>
+        </div>
+
+        <div class="content">
+          <!-- Search + table header -->
+          <div class="section-header" style="margin-bottom: 16px">
+            <span class="section-title">Storico transazioni</span>
+            <div class="search-bar">
+              <span class="search-bar__icon">🔍</span>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Cerca descrizione, categoria…"
+                autocomplete="off"
+              />
+              <button id="searchClear" type="button">Svuota</button>
+              <span id="searchResultCount" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Transactions table -->
+          <div class="card" style="padding: 0; overflow: hidden">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Descrizione</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th style="text-align: right">Importo</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsBody">
+                  <tr>
+                    <td colspan="5" class="state-loading">Caricamento…</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Detail panel (hidden until a row is clicked) -->
+          <div class="detail-panel" id="detailPanel">
+            <div class="detail-panel__title">Dettaglio movimento</div>
+            <dl class="detail-grid">
+              <dt>Descrizione</dt>
+              <dd id="detailDescription">—</dd>
+              <dt>Data</dt>
+              <dd id="detailDate">—</dd>
+              <dt>Categoria</dt>
+              <dd id="detailCategory">—</dd>
+              <dt>Importo</dt>
+              <dd id="detailAmount">—</dd>
+            </dl>
+          </div>
+        </div>
+        <!-- /content -->
+      </div>
+      <!-- /main -->
+    </div>
+    <!-- /layout -->
+
+    <script src="api.js"></script>
+    <script src="transactions.js"></script>
+    <script src="events.js"></script>
+    <script type="module">
+      import { initRealTimeSearch } from "./realTimeSearch.js";
+
+      initRealTimeSearch({
+        onResults(results) {
+          setTransactions(results);
+          renderTransactions(results);
+        },
+      });
+    </script>
+    <script>
+      (async () => {
+        const user = await fetchUser();
+        if (user) {
+          document.getElementById("topbarUser").textContent = user.name;
+        }
+
+        const txs = await fetchTransactions();
+        setTransactions(txs);
+        renderTransactions(txs);
+        initTableEvents();
+        let latestSearch = 0;
+        initSearch(async (query) => {
+          const requestId = ++latestSearch;
+          const results = await fetchTransactions(query);
+          if (requestId !== latestSearch) return;
+          setTransactions(results);
+          renderTransactions(results);
+        });
+      })();
+    </script>
+  </body>
+</html>
