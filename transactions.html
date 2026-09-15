@@ -1,174 +1,219 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transazioni — LipariBank</title>
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-
-  <div class="app">
-
-    <!-- =====================================================================
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transazioni — LipariBank</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- =====================================================================
          SIDEBAR
          ===================================================================== -->
-    <aside class="sidebar">
-      <div class="sidebar__logo">
-        <div class="sidebar__logo-text">Lipari<span>Bank</span></div>
-      </div>
+      <aside class="sidebar">
+        <div class="sidebar__logo">
+          <div class="sidebar__logo-text">Lipari<span>Bank</span></div>
+        </div>
 
-      <nav class="sidebar__nav" aria-label="Navigazione principale">
-        <ul class="sidebar-nav__list">
+        <nav class="sidebar__nav" aria-label="Navigazione principale">
+          <ul class="sidebar-nav__list">
+            <li class="sidebar-nav__item">
+              <a href="dashboard.html" class="sidebar-nav__link">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="sidebar-nav__item">
+              <a
+                href="transactions.html"
+                class="sidebar-nav__link sidebar-nav__link--active"
+                aria-current="page"
+              >
+                <span class="nav-icon">💳</span>
+                <span>Transazioni</span>
+              </a>
+            </li>
 
-          <li class="sidebar-nav__item">
-            <a href="transactions.html" class="sidebar-nav__link sidebar-nav__link--active" aria-current="page">
-              <span class="nav-icon">💳</span>
-              <span>Transazioni</span>
-            </a>
-          </li>
+            <li class="sidebar-nav__item">
+              <a href="login.html" class="sidebar-nav__link">
+                <span class="nav-icon">🚪</span>
+                <span>Esci</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-          <li class="sidebar-nav__item">
-            <a href="login.html" class="sidebar-nav__link">
-              <span class="nav-icon">🚪</span>
-              <span>Esci</span>
-            </a>
-          </li>
+        <div class="sidebar__footer">© 2024 LipariBank S.p.A.</div>
+      </aside>
 
-        </ul>
-      </nav>
-
-      <div class="sidebar__footer">
-        © 2024 LipariBank S.p.A.
-      </div>
-    </aside>
-
-    <!-- =====================================================================
+      <!-- =====================================================================
          MAIN
          ===================================================================== -->
-    <main class="main">
+      <main class="main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <h1 class="topbar__title">Transazioni</h1>
+          <div class="topbar__user">
+            <span>Mario Rossi</span>
+            <div class="topbar__avatar">MR</div>
+          </div>
+        </header>
 
-      <!-- Topbar -->
-      <header class="topbar">
-        <h1 class="topbar__title">Transazioni</h1>
-        <div class="topbar__user">
-          <span>Mario Rossi</span>
-          <div class="topbar__avatar">MR</div>
+        <!-- Contenuto -->
+        <div class="page-content">
+          <div class="grid grid--cols-3 mb-lg">
+            <div class="stat-card">
+              <span class="stat-card__icon">⚖️</span>
+              <div class="stat-card__label">Saldo periodo</div>
+              <div class="stat-card__value" id="balance-value">…</div>
+              <div class="stat-card__sub">Entrate meno uscite</div>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card__icon">📈</span>
+              <div class="stat-card__label">Totale entrate</div>
+              <div
+                class="stat-card__value stat-card__value--positive"
+                id="total-credits"
+              >
+                …
+              </div>
+              <div class="stat-card__sub">Accrediti nel periodo</div>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card__icon">📉</span>
+              <div class="stat-card__label">Totale uscite</div>
+              <div
+                class="stat-card__value stat-card__value--negative"
+                id="total-debits"
+              >
+                …
+              </div>
+              <div class="stat-card__sub">Addebiti nel periodo</div>
+            </div>
+          </div>
+
+          <div class="filters-bar">
+            <div class="form-group">
+              <label for="filter-type">Tipo</label>
+              <select id="filter-type" class="form-control">
+                <option value="all">Tutti</option>
+                <option value="credit">Entrate</option>
+                <option value="debit">Uscite</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="filter-category">Categoria</label>
+              <select id="filter-category" class="form-control">
+                <option value="all">Tutte</option>
+                <option value="Entrata">Entrata</option>
+                <option value="Bonifico">Bonifico</option>
+                <option value="Alimentari">Alimentari</option>
+                <option value="Utenze">Utenze</option>
+                <option value="Svago">Svago</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Trasporti">Trasporti</option>
+                <option value="Casa">Casa</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="sort-select">Ordina per</label>
+              <select id="sort-select" class="form-control">
+                <option value="date-desc">Data ↓ (più recente)</option>
+                <option value="date-asc">Data ↑ (più vecchia)</option>
+                <option value="amount-desc">Importo ↓ (maggiore)</option>
+                <option value="amount-asc">Importo ↑ (minore)</option>
+              </select>
+            </div>
+
+            <button
+              id="reset-filters"
+              class="btn btn--ghost"
+              style="align-self: flex-end"
+            >
+              ↺ Reset
+            </button>
+
+            <div
+              style="
+                margin-left: auto;
+                align-self: flex-end;
+                font-size: 13px;
+                color: #7f8c8d;
+              "
+            >
+              <span id="tx-count">—</span> movimenti
+            </div>
+          </div>
+
+          <!-- Tabella transazioni -->
+          <div class="card">
+            <div class="card__header">
+              <h2 class="card__title">Movimenti</h2>
+              <div class="transactions-tools">
+                <label class="search-field" for="searchInput"
+                  >Cerca movimento</label
+                >
+                <div class="search-controls">
+                  <input
+                    id="searchInput"
+                    class="form-control"
+                    type="search"
+                    placeholder="Descrizione, categoria o importo"
+                    autocomplete="off"
+                  />
+                  <button
+                    id="searchClear"
+                    class="btn btn--outline btn--sm"
+                    type="button"
+                  >
+                    Svuota
+                  </button>
+                </div>
+                <span id="searchResultCount" aria-live="polite"></span>
+              </div>
+              <button class="btn btn--outline btn--sm" type="button">
+                ⬇ Esporta CSV
+              </button>
+            </div>
+
+            <table class="transactions-table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Descrizione</th>
+                  <th>Categoria</th>
+                  <th>Tipo</th>
+                  <th class="col-amount">Importo</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-body">
+                <!-- Popolato da transactions.js -->
+              </tbody>
+            </table>
+
+            <!-- Stato vuoto -->
+            <div id="empty-state" class="empty-state" style="display: none">
+              <div class="empty-state__icon">🔍</div>
+              <div class="empty-state__title">Nessun risultato</div>
+              <p class="empty-state__text">
+                Nessuna transazione corrisponde ai filtri selezionati.
+              </p>
+            </div>
+          </div>
         </div>
-      </header>
+      </main>
+    </div>
 
-      <!-- Contenuto -->
-      <div class="page-content">
+    <script type="module" src="js/transactions.js"></script>
+    <script type="module">
+      import { initSearch } from "./js/search.js";
 
-        <div class="grid grid--cols-3 mb-lg">
-
-          <div class="stat-card">
-            <span class="stat-card__icon">⚖️</span>
-            <div class="stat-card__label">Saldo periodo</div>
-            <div class="stat-card__value" id="balance-value">…</div>
-            <div class="stat-card__sub">Entrate meno uscite</div>
-          </div>
-
-          <div class="stat-card">
-            <span class="stat-card__icon">📈</span>
-            <div class="stat-card__label">Totale entrate</div>
-            <div class="stat-card__value stat-card__value--positive" id="total-credits">…</div>
-            <div class="stat-card__sub">Accrediti nel periodo</div>
-          </div>
-
-          <div class="stat-card">
-            <span class="stat-card__icon">📉</span>
-            <div class="stat-card__label">Totale uscite</div>
-            <div class="stat-card__value stat-card__value--negative" id="total-debits">…</div>
-            <div class="stat-card__sub">Addebiti nel periodo</div>
-          </div>
-
-        </div>
-
-        <div class="filters-bar">
-
-          <div class="form-group">
-            <label for="filter-type">Tipo</label>
-            <select id="filter-type" class="form-control">
-              <option value="all">Tutti</option>
-              <option value="credit">Entrate</option>
-              <option value="debit">Uscite</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="filter-category">Categoria</label>
-            <select id="filter-category" class="form-control">
-              <option value="all">Tutte</option>
-              <option value="Entrata">Entrata</option>
-              <option value="Bonifico">Bonifico</option>
-              <option value="Alimentari">Alimentari</option>
-              <option value="Utenze">Utenze</option>
-              <option value="Svago">Svago</option>
-              <option value="Shopping">Shopping</option>
-              <option value="Trasporti">Trasporti</option>
-              <option value="Casa">Casa</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="sort-select">Ordina per</label>
-            <select id="sort-select" class="form-control">
-              <option value="date-desc">Data ↓ (più recente)</option>
-              <option value="date-asc">Data ↑ (più vecchia)</option>
-              <option value="amount-desc">Importo ↓ (maggiore)</option>
-              <option value="amount-asc">Importo ↑ (minore)</option>
-            </select>
-          </div>
-
-          <button id="reset-filters" class="btn btn--ghost" style="align-self: flex-end;">
-            ↺ Reset
-          </button>
-
-          <div style="margin-left: auto; align-self: flex-end; font-size: 13px; color: #7f8c8d;">
-            <span id="tx-count">—</span> movimenti
-          </div>
-
-        </div>
-
-        <!-- Tabella transazioni -->
-        <div class="card">
-          <div class="card__header">
-            <h2 class="card__title">Movimenti</h2>
-            <button class="btn btn--outline btn--sm">⬇ Esporta CSV</button>
-          </div>
-
-          <table class="transactions-table">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Descrizione</th>
-                <th>Categoria</th>
-                <th>Tipo</th>
-                <th class="col-amount">Importo</th>
-              </tr>
-            </thead>
-            <tbody id="transactions-body">
-              <!-- Popolato da transactions.js -->
-            </tbody>
-          </table>
-
-          <!-- Stato vuoto -->
-          <div id="empty-state" class="empty-state" style="display: none;">
-            <div class="empty-state__icon">🔍</div>
-            <div class="empty-state__title">Nessun risultato</div>
-            <p class="empty-state__text">Nessuna transazione corrisponde ai filtri selezionati.</p>
-          </div>
-
-        </div>
-
-      </div>
-    </main>
-
-  </div>
-
-  <script src="js/utils.js"></script>
-  <script src="js/transactions.js"></script>
-
-</body>
+      document.addEventListener("DOMContentLoaded", initSearch);
+    </script>
+  </body>
 </html>

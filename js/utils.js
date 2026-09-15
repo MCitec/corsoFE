@@ -144,3 +144,11 @@ function getCategoryBadgeClass(category) {
   };
   return map[category] || "badge--neutral";
 }
+
+export {
+  transactions,
+  calculateBalance,
+  formatCurrency,
+  formatDate,
+  getCategoryBadgeClass,
+};

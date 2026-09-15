@@ -36,7 +36,7 @@ class LoginController {
     // Simulazione chiamata API con delay
     setTimeout(() => {
       if (username === "mario.rossi" && password === "password123") {
-        window.location.href = "transactions.html";
+        window.location.href = "dashboard.html";
       } else {
         this.showError("Credenziali non valide. Riprova.");
         this.isLoading = false;

@@ -5,45 +5,82 @@
 
 "use strict";
 
+import {
+  calculateBalance,
+  formatCurrency,
+  formatDate,
+  getCategoryBadgeClass,
+  transactions,
+} from "./utils.js";
+
 // =============================================================================
 // Rendering
 // =============================================================================
 
-function renderTransactions(list) {
+export function renderTransactions(list) {
   const tbody = document.getElementById("transactions-body");
   const emptyState = document.getElementById("empty-state");
 
   if (!tbody) return;
 
   if (list.length === 0) {
-    tbody.innerHTML = "";
-    emptyState.style.display = "block";
+    tbody.replaceChildren();
+    if (emptyState) emptyState.style.display = "block";
     return;
   }
 
-  emptyState.style.display = "none";
+  if (emptyState) emptyState.style.display = "none";
 
-  tbody.innerHTML = list
-    .map((tx) => {
-      const isCredit = tx.type === "credit";
-      const amountClass = isCredit ? "amount--credit" : "amount--debit";
-      const amountSign = isCredit ? "+" : "";
-      const typeLabel = isCredit ? "Entrata" : "Uscita";
-      const typeBadge = isCredit ? "badge--success" : "badge--neutral";
+  const fragment = document.createDocumentFragment();
 
-      return `
-      <tr>
-        <td class="col-date">${formatDate(tx.date)}</td>
-        <td>${tx.description}</td>
-        <td><span class="badge ${getCategoryBadgeClass(tx.category)}">${tx.category}</span></td>
-        <td><span class="badge ${typeBadge}">${typeLabel}</span></td>
-        <td class="col-amount ${amountClass}">
-          ${amountSign}${formatCurrency(tx.amount)}
-        </td>
-      </tr>
-    `;
-    })
-    .join("");
+  list.forEach((tx) => {
+    const isCredit = tx.type === "credit";
+    const typeLabel = isCredit ? "Entrata" : "Uscita";
+    const row = document.createElement("tr");
+    row.dataset.transactionId = tx.id;
+
+    const dateCell = document.createElement("td");
+    dateCell.className = "col-date";
+    dateCell.textContent = formatDate(tx.date);
+
+    const descriptionCell = document.createElement("td");
+    descriptionCell.textContent = tx.description;
+
+    const categoryCell = document.createElement("td");
+    const categoryBadge = document.createElement("span");
+    categoryBadge.className = `badge ${getCategoryBadgeClass(tx.category)}`;
+    categoryBadge.textContent = tx.category;
+    categoryCell.appendChild(categoryBadge);
+
+    const typeCell = document.createElement("td");
+    const typeBadge = document.createElement("span");
+    typeBadge.className = `badge ${isCredit ? "badge--success" : "badge--neutral"}`;
+    typeBadge.textContent = typeLabel;
+    typeCell.appendChild(typeBadge);
+
+    const amountCell = document.createElement("td");
+    amountCell.className = `col-amount ${isCredit ? "amount--credit" : "amount--debit"}`;
+    amountCell.textContent = `${isCredit ? "+" : "-"}${formatCurrency(Math.abs(Number(tx.amount)))}`;
+
+    row.append(dateCell, descriptionCell, categoryCell, typeCell, amountCell);
+    fragment.appendChild(row);
+  });
+
+  tbody.replaceChildren(fragment);
+}
+
+function initRowDelegation() {
+  const tbody = document.getElementById("transactions-body");
+  if (!tbody) return;
+
+  tbody.addEventListener("click", (event) => {
+    const row = event.target.closest("tr[data-transaction-id]");
+    if (!row || !tbody.contains(row)) return;
+
+    if (typeof openDetail === "function") {
+      openDetail(row.dataset.transactionId);
+    }
+  });
 }
 
 // =============================================================================
@@ -150,4 +187,5 @@ function initFilters() {
 document.addEventListener("DOMContentLoaded", () => {
   applyFilters();
   initFilters();
+  initRowDelegation();
 });

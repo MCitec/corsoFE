@@ -1,4 +1,10 @@
-@charset "UTF-8";
+// =============================================================================
+// main.scss — Entry point SCSS LipariBank
+// =============================================================================
+
+@use "variables" as *;
+@use "mixins" as *;
+
 /* Reset */
 *,
 *::before,
@@ -10,13 +16,13 @@
 
 html {
   font-size: 16px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: $font-family;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: #f5f7fa;
-  color: #2c3e50;
+  background-color: $color-bg;
+  color: $color-text;
   line-height: 1.5;
   min-height: 100vh;
 }
@@ -30,6 +36,7 @@ svg {
 /* =============================================================================
    Layout — App shell
    ============================================================================= */
+
 .app {
   display: flex;
   min-height: 100vh;
@@ -37,8 +44,8 @@ svg {
 
 /* Sidebar */
 .sidebar {
-  width: 260px;
-  background: #1a3a5c;
+  width: $sidebar-width;
+  background: $color-primary;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -121,7 +128,7 @@ svg {
 /* Main */
 .main {
   flex: 1;
-  margin-left: 260px;
+  margin-left: $sidebar-width;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -181,11 +188,9 @@ svg {
 .grid--cols-2 {
   grid-template-columns: repeat(2, 1fr);
 }
-
 .grid--cols-3 {
   grid-template-columns: repeat(3, 1fr);
 }
-
 .grid--cols-4 {
   grid-template-columns: repeat(4, 1fr);
 }
@@ -194,23 +199,18 @@ svg {
 .mb-sm {
   margin-bottom: 8px;
 }
-
 .mb-md {
   margin-bottom: 16px;
 }
-
 .mb-lg {
   margin-bottom: 24px;
 }
-
 .mb-xl {
   margin-bottom: 32px;
 }
-
 .mt-md {
   margin-top: 16px;
 }
-
 .mt-lg {
   margin-top: 24px;
 }
@@ -218,11 +218,10 @@ svg {
 /* =============================================================================
    Components
    ============================================================================= */
+
 /* Card */
 .card {
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  @include card;
   padding: 24px;
 }
 
@@ -241,9 +240,7 @@ svg {
 
 /* Stat card */
 .stat-card {
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  @include card;
   padding: 22px;
 }
 
@@ -272,15 +269,12 @@ svg {
 .stat-card__value--positive {
   color: #27ae60;
 }
-
 .stat-card__value--negative {
   color: #e74c3c;
 }
-
 .stat-card__value--accent {
   color: #f0a500;
 }
-
 .stat-card__value--nan {
   color: #e74c3c;
   font-size: 20px;
@@ -312,30 +306,24 @@ svg {
 .transaction-preview-item:last-child {
   border-bottom: none;
 }
-
 .transaction-preview-item__desc {
   color: #2c3e50;
 }
-
 .transaction-preview-item__amount {
   font-weight: 600;
   white-space: nowrap;
 }
-
 .transaction-preview-item__amount--credit {
   color: #27ae60;
 }
-
 .transaction-preview-item__amount--debit {
   color: #e74c3c;
 }
-
 .transaction-preview-item__date {
   color: #7f8c8d;
   white-space: nowrap;
   font-size: 13px;
 }
-
 .skeleton-row {
   color: #7f8c8d;
   padding: 12px 0;
@@ -350,14 +338,7 @@ svg {
 
 /* Buttons */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border-radius: 8px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  cursor: pointer;
-  text-decoration: none;
+  @include button-base;
   padding: 8px 20px;
   border: none;
   font-size: 14px;
@@ -370,49 +351,40 @@ svg {
 }
 
 .btn--primary {
-  background: #2d7dd2;
+  background: $color-action;
   color: #fff;
 }
-
 .btn--primary:hover {
-  background: #2168b8;
+  background: $color-action-dark;
 }
-
 .btn--secondary {
   background: #1a3a5c;
   color: #fff;
 }
-
 .btn--secondary:hover {
   background: #12283f;
 }
-
 .btn--outline {
   background: transparent;
   color: #2d7dd2;
   border: 1.5px solid #2d7dd2;
 }
-
 .btn--outline:hover {
   background: rgba(45, 125, 210, 0.08);
 }
-
 .btn--ghost {
   background: transparent;
   color: #7f8c8d;
   border: 1.5px solid #dde1e7;
 }
-
 .btn--ghost:hover {
   background: #f5f7fa;
   color: #2c3e50;
 }
-
 .btn--danger {
   background: #e74c3c;
   color: #fff;
 }
-
 .btn--danger:hover {
   background: #c0392b;
 }
@@ -421,12 +393,10 @@ svg {
   padding: 5px 14px;
   font-size: 13px;
 }
-
 .btn--lg {
   padding: 13px 28px;
   font-size: 16px;
 }
-
 .btn--full {
   width: 100%;
 }
@@ -458,7 +428,9 @@ svg {
   font-size: 15px;
   color: #2c3e50;
   background: #ffffff;
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .form-control:focus {
@@ -516,7 +488,6 @@ select.form-control {
 .transactions-table tr:last-child td {
   border-bottom: none;
 }
-
 .transactions-table tr:hover td {
   background: rgba(45, 125, 210, 0.04);
 }
@@ -526,7 +497,6 @@ select.form-control {
   font-weight: 600;
   white-space: nowrap;
 }
-
 .col-date {
   color: #7f8c8d;
   white-space: nowrap;
@@ -536,7 +506,6 @@ select.form-control {
 .amount--credit {
   color: #27ae60;
 }
-
 .amount--debit {
   color: #e74c3c;
 }
@@ -556,22 +525,18 @@ select.form-control {
   background: rgba(39, 174, 96, 0.13);
   color: #1e8449;
 }
-
 .badge--warning {
   background: rgba(243, 156, 18, 0.13);
   color: #9a6208;
 }
-
 .badge--danger {
   background: rgba(231, 76, 60, 0.13);
   color: #c0392b;
 }
-
 .badge--info {
   background: rgba(45, 125, 210, 0.13);
   color: #1e5fa0;
 }
-
 .badge--neutral {
   background: #f0f2f5;
   color: #7f8c8d;
@@ -594,19 +559,16 @@ select.form-control {
   border: 1px solid rgba(39, 174, 96, 0.3);
   color: #1a7a42;
 }
-
 .alert--warning {
   background: rgba(243, 156, 18, 0.1);
   border: 1px solid rgba(243, 156, 18, 0.3);
   color: #8a5a06;
 }
-
 .alert--danger {
   background: rgba(231, 76, 60, 0.1);
   border: 1px solid rgba(231, 76, 60, 0.3);
   color: #c0392b;
 }
-
 .alert--info {
   background: rgba(45, 125, 210, 0.1);
   border: 1px solid rgba(45, 125, 210, 0.3);
@@ -651,14 +613,12 @@ select.form-control {
   font-size: 48px;
   margin-bottom: 16px;
 }
-
 .empty-state__title {
   font-size: 18px;
   font-weight: 600;
   color: #2c3e50;
   margin-bottom: 8px;
 }
-
 .empty-state__text {
   font-size: 14px;
 }
@@ -666,6 +626,7 @@ select.form-control {
 /* =============================================================================
    Login page
    ============================================================================= */
+
 .login-page {
   min-height: 100vh;
   display: flex;
@@ -756,5 +717,3 @@ select.form-control {
   background: #dde1e7;
   margin: 20px 0;
 }
-
-/*# sourceMappingURL=main.css.map */

@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "LipariBank Day 2 — JavaScript debugging mission",
   "scripts": {
-    "start": "npx live-server --port=3000"
+    "start": "npx live-server --port=3000",
+    "build:css": "sass scss/main.scss css/main.css",
+    "dev:css": "sass --watch scss/main.scss css/main.css"
+  },
+  "devDependencies": {
+    "sass": "^1.70.0"
   }
 }

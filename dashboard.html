@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | LipariBank</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar__logo">
+          <div class="sidebar__logo-text">Lipari<span>Bank</span></div>
+        </div>
+        <nav class="sidebar__nav" aria-label="Navigazione principale">
+          <ul class="sidebar-nav__list">
+            <li class="sidebar-nav__item">
+              <a
+                href="dashboard.html"
+                class="sidebar-nav__link sidebar-nav__link--active"
+                aria-current="page"
+              >
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="sidebar-nav__item">
+              <a href="transactions.html" class="sidebar-nav__link">
+                <span class="nav-icon">▣</span>
+                <span>Transazioni</span>
+              </a>
+            </li>
+            <li class="sidebar-nav__item">
+              <a href="login.html" class="sidebar-nav__link">
+                <span class="nav-icon">↪</span>
+                <span>Esci</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="sidebar__footer">© 2024 LipariBank S.p.A.</div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 class="topbar__title">Dashboard</h1>
+            <time id="currentDate" class="topbar__date"></time>
+          </div>
+          <div class="topbar__user">
+            <span>Mario Rossi</span>
+            <div class="topbar__avatar">MR</div>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <section class="grid grid--cols-2 mb-lg" aria-label="Riepilogo conto">
+            <div class="stat-card">
+              <span class="stat-card__icon">€</span>
+              <div class="stat-card__label">Saldo disponibile</div>
+              <div
+                class="stat-card__value"
+                id="balanceAmount"
+                aria-live="polite"
+              >
+                Caricamento...
+              </div>
+              <div class="stat-card__sub">Conto corrente personale</div>
+            </div>
+            <div class="card">
+              <div class="card__header">
+                <h2 class="card__title">Azioni rapide</h2>
+              </div>
+              <a class="btn btn--outline" href="transactions.html"
+                >Vedi tutti i movimenti</a
+              >
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="recent-title">
+            <div class="card__header">
+              <h2 id="recent-title" class="card__title">Movimenti recenti</h2>
+              <a class="btn btn--outline btn--sm" href="transactions.html"
+                >Apri elenco</a
+              >
+            </div>
+            <ul
+              id="recentTransactionsList"
+              class="transaction-preview-list"
+              aria-live="polite"
+            >
+              <li class="skeleton-row" aria-hidden="true">
+                Caricamento movimenti...
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>

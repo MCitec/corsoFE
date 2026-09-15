@@ -1,0 +1,29 @@
+// Design tokens LipariBank
+$color-primary: #1a3a5c;
+$color-primary-dark: #12283f;
+$color-primary-light: #2d5986;
+$color-accent: #f0a500;
+$color-action: #2d7dd2;
+$color-action-dark: #2168b8;
+$color-success: #27ae60;
+$color-danger: #e74c3c;
+$color-bg: #f5f7fa;
+$color-white: #ffffff;
+$color-text: #2c3e50;
+$color-text-muted: #7f8c8d;
+$color-border: #dde1e7;
+$sidebar-width: 260px;
+$font-family:
+  "Inter",
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  sans-serif;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$radius-md: 8px;
+$radius-lg: 10px;
+$shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+$transition-fast: 150ms ease;
+$transition-base: 200ms ease;
