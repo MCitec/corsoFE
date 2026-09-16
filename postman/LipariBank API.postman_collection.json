@@ -1,0 +1,123 @@
+{
+  "info": {
+    "name": "LipariBank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001"
+    }
+  ],
+  "item": [
+    {
+      "name": "List transactions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/transactions"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "List credits",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/transactions?type=credit"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search transactions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/transactions?q=stipendio"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Get user",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/users/1"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Create transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"date\": \"2024-02-01\",\n  \"description\": \"Test\",\n  \"amount\": 100,\n  \"type\": \"credit\",\n  \"category\": \"Entrata\"\n}"
+        },
+        "url": "{{baseUrl}}/transactions"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
