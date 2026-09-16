@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LipariBank - Movimenti</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar__logo">LipariBank</div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a
+          ><a class="active" href="transactions.html">Movimenti</a>
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <span>Movimenti</span><span>Mario Rossi</span>
+        </header>
+        <div class="content">
+          <div class="section-header">
+            <h1>Storico transazioni</h1>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Cerca movimenti..."
+              autocomplete="off"
+            />
+          </div>
+          <section class="card">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Descrizione</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Importo</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsBody">
+                  <tr>
+                    <td colspan="5">Caricamento...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="detail-panel" id="detailPanel" hidden></section>
+        </div>
+      </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/search.js"></script>
+  </body>
+</html>

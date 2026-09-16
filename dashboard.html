@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LipariBank - Dashboard</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar__logo">LipariBank</div>
+        <nav>
+          <a class="active" href="dashboard.html">Dashboard</a
+          ><a href="transactions.html">Movimenti</a>
+        </nav>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <span>Dashboard</span><span>Mario Rossi</span>
+        </header>
+        <div class="content">
+          <div class="skeleton-grid" aria-busy="true">
+            <div class="skeleton skeleton--large"></div>
+            <div class="skeleton skeleton--large"></div>
+            <div class="skeleton skeleton--large"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+  </body>
+</html>

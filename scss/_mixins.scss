@@ -1,0 +1,15 @@
+@use "variables" as *;
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 3px solid rgba(20, 125, 114, 0.3);
+    outline-offset: 2px;
+  }
+}
+
+@mixin panel {
+  background: $surface;
+  border: 1px solid $line;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(23, 35, 47, 0.05);
+}

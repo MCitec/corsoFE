@@ -1,0 +1,14 @@
+{
+  "name": "liparibank-api-exercises",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "api": "json-server --watch db.json --port 3001",
+    "build:css": "sass scss/main.scss css/main.css",
+    "dev:css": "sass --watch scss/main.scss css/main.css"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "sass": "^1.70.0"
+  }
+}
