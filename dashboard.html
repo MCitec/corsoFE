@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LipariBank — Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="logo-icon">🏦</span>
+      <span class="logo-text">LipariBank</span>
+    </div>
+    <nav class="topbar__nav">
+      <a href="dashboard.html" class="nav-link nav-link--active">Dashboard</a>
+      <a href="login.html" class="nav-link">Esci</a>
+    </nav>
+  </header>
+
+  <main class="main-content">
+
+    <section class="balance-card">
+      <p class="balance-card__label">Saldo disponibile</p>
+      <p id="balance" class="balance-card__amount">—</p>
+    </section>
+
+    <section class="transactions-section">
+      <div class="transactions-header">
+        <h2 class="section-title">Movimenti recenti</h2>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Cerca movimenti…"
+        />
+      </div>
+
+      <div class="table-wrapper">
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrizione</th>
+              <th>Categoria</th>
+              <th style="text-align:right">Importo</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsBody">
+            <tr>
+              <td colspan="4" class="state-loading">Caricamento…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="dist/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Dipendenze
+node_modules/
+
+# Output della compilazione TypeScript
+dist/
+*.tsbuildinfo
+
+# File di ambiente
+.env
+.env.*
+!.env.example
+
+# Log npm
+debug.log
+npm-debug.log*
+
+# File generati dal sistema operativo e dall'editor
+.DS_Store
+Thumbs.db
+.vscode/
