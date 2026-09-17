@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dettagli del conto corrente LipariBank."
+    />
+    <title>LipariBank - Il mio conto</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a
+        class="topbar__brand"
+        href="dashboard.html"
+        aria-label="Torna alla dashboard LipariBank"
+      >
+        <span class="logo-icon" aria-hidden="true">🏦</span>
+        <span class="logo-text">LipariBank</span>
+      </a>
+      <nav class="topbar__nav" aria-label="Navigazione principale">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="transactions.html" class="nav-link">Movimenti</a>
+        <a
+          href="account.html"
+          class="nav-link nav-link--active"
+          aria-current="page"
+          >Il mio conto</a
+        >
+      </nav>
+    </header>
+    <main class="main-content">
+      <section class="page-header">
+        <h1 class="page-title">Il mio conto</h1>
+        <a href="transactions.html" class="btn btn--primary">Vedi movimenti</a>
+      </section>
+      <section class="account-card" aria-labelledby="account-details-title">
+        <h2 id="account-details-title">Conto corrente principale</h2>
+        <dl class="account-details">
+          <dt>Intestatario</dt>
+          <dd>Mario Rossi</dd>
+          <dt>IBAN</dt>
+          <dd>IT60 X054 2811 1010 0000 0123 456</dd>
+          <dt>Saldo disponibile</dt>
+          <dd class="account-card__balance">€ 4.820,50</dd>
+          <dt>Tipo di conto</dt>
+          <dd>Conto corrente Smart</dd>
+          <dt>Data di apertura</dt>
+          <dd>12 marzo 2021</dd>
+        </dl>
+      </section>
+    </main>
+  </body>
+</html>
