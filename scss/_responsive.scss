@@ -1,0 +1,40 @@
+@use "variables" as v;
+
+@media (max-width: v.$breakpoint-mobile) {
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .topbar__nav .nav-link:not(.nav-link--active) {
+    display: none;
+  }
+
+  .main-content {
+    padding: 0 16px;
+    margin-top: 20px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .account-card {
+    border-radius: 0;
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .table-wrapper {
+    border-radius: 0;
+    margin-left: -16px;
+    margin-right: -16px;
+    overflow-x: auto;
+  }
+
+  .transactions-table td,
+  .transactions-table th {
+    padding: 10px 12px;
+  }
+}

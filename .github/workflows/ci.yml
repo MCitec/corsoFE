@@ -1,0 +1,146 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: TypeScript and ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      # Scarica il codice esatto associato all'evento CI.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configura Node e abilita la cache npm usando package-lock.json come chiave.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # Installa le versioni bloccate nel lockfile senza modificare le dipendenze.
+      - name: Install dependencies
+        run: npm ci
+
+      # Verifica i tipi TypeScript prima degli altri controlli statici.
+      - name: Run TypeScript type-check
+        run: npm run type-check
+
+      # Esegue ESLint usando le dipendenze bloccate nel package-lock.json.
+      - name: Run ESLint
+        run: npm run lint
+
+  build:
+    name: Vite build
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      # Scarica il codice che ha superato i controlli di qualità.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configura Node con cache npm keyed by package-lock.json.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # Installa dipendenze riproducibili per la build di produzione.
+      - name: Install dependencies
+        run: npm ci
+
+      # Genera gli asset ottimizzati Vite nella directory dist.
+      - name: Build application
+        run: npm run build
+
+      # Conserva dist per i job di audit e deploy senza ricompilare.
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      # Scarica il codice per avviare il server statico locale.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Configura Node per servire gli asset e lanciare Lighthouse CI.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      # Recupera la build già verificata dal job build.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist
+
+      # Avvia un server statico per fornire a Lighthouse le pagine reali.
+      - name: Start preview server
+        run: npx --yes serve@14 dist -l 4173 > /tmp/lighthouse-server.log 2>&1 &
+
+      # Attende che il server risponda prima di iniziare l'audit.
+      - name: Wait for preview server
+        run: npx --yes wait-on@8 http://127.0.0.1:4173/dashboard.html
+
+      # Esegue Lighthouse CI senza richiedere @lhci/cli nel package.json.
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.14.0 autorun
+
+  deploy-preview:
+    name: Netlify preview deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.deploy_url }}
+
+    steps:
+      # Scarica il codice della PR che richiede la preview.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Recupera la build prodotta dal job build.
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist
+
+      # Pubblica una deploy preview Netlify usando esclusivamente GitHub Secrets.
+      - name: Deploy preview to Netlify
+        id: deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          test -n "$NETLIFY_AUTH_TOKEN"
+          test -n "$NETLIFY_SITE_ID"
+          deploy_output=$(npx --yes netlify-cli@17 deploy --dir=dist --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN" --json)
+          deploy_url=$(printf '%s' "$deploy_output" | node -e "let input=''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => process.stdout.write(JSON.parse(input).deploy_url));")
+          echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"
