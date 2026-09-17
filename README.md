@@ -106,3 +106,5 @@ git push -u origin main
 ```
 
 `node_modules/`, `dist/`, `.env` e `css/main.css` sono esclusi dal versionamento secondo `.gitignore`.
+
+La storia locale include i branch `feature/login-improvements`, `feature/account-page`, `feature/improved-styles`, `feature/dark-theme` e `feature/brand-colors`, oltre al merge commit che documenta la risoluzione del conflitto sui colori del tema.
