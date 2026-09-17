@@ -12,7 +12,8 @@
       <section class="account-card" aria-labelledby="login-title">
         <p class="logo-text">LipariBank</p>
         <h1 id="login-title" class="page-title">Accedi al tuo conto</h1>
-        <form class="login-form" action="dashboard.html" method="get">
+        <p id="login-help">Accedi per visualizzare saldo e movimenti.</p>
+        <form class="login-form" action="dashboard.html" method="get" aria-describedby="login-help">
           <label for="email">Email</label>
           <input
             id="email"
