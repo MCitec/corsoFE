@@ -1,0 +1,220 @@
+@use 'variables' as v;
+@use 'responsive';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: v.$color-bg;
+  color: v.$color-text;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ── Top bar ─────────────────────────────────────── */
+
+.topbar {
+  background: v.$color-surface;
+  border-bottom: 1px solid v.$color-border;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: v.$shadow;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon { font-size: 22px; }
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: v.$color-primary;
+}
+
+.topbar__nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  padding: 6px 12px;
+  border-radius: v.$radius;
+  font-size: 14px;
+  font-weight: 500;
+  color: v.$color-muted;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover { background: v.$color-bg; color: v.$color-text; }
+
+.nav-link--active {
+  color: v.$color-primary;
+  background: #eff4ff;
+}
+
+/* ── Main content ────────────────────────────────── */
+
+.main-content {
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+/* ── Page header ─────────────────────────────────── */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ── Buttons ─────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 20px;
+  border: none;
+  border-radius: v.$radius;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.btn--primary {
+  background-color: v.$color-primary;
+  color: v.$color-primary-text;
+}
+
+.btn--primary:hover {
+  background-color: v.$color-primary-hover;
+}
+
+/* ── Account card ────────────────────────────────── */
+
+.accounts-list {
+  display: grid;
+  gap: 16px;
+}
+
+.account-card {
+  background: v.$color-surface;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius;
+  padding: 24px;
+  box-shadow: v.$shadow;
+}
+
+.account-card__iban {
+  font-size: 13px;
+  color: v.$color-muted;
+  margin-bottom: 4px;
+  font-family: monospace;
+}
+
+.account-card__holder {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.account-card__balance {
+  font-size: 32px;
+  font-weight: 700;
+  color: v.$color-primary;
+  margin-bottom: 20px;
+}
+
+/* ── Table ───────────────────────────────────────── */
+
+.table-wrapper {
+  background: v.$color-surface;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius;
+  overflow: hidden;
+  box-shadow: v.$shadow;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table th {
+  background: v.$color-bg;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: v.$color-muted;
+  text-align: left;
+  border-bottom: 1px solid v.$color-border;
+}
+
+.transactions-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid v.$color-border;
+  font-size: 14px;
+}
+
+.transactions-table tr:last-child td { border-bottom: none; }
+
+/* ── Badge ───────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+  background: v.$color-bg;
+  color: v.$color-muted;
+}
+
+/* ── Amount colors ───────────────────────────────── */
+
+.amount--credit { color: v.$color-credit; font-weight: 600; }
+.amount--debit  { color: v.$color-debit;  font-weight: 600; }
+
+/* ── States ──────────────────────────────────────── */
+
+.state-loading,
+.state-empty {
+  text-align: center;
+  color: v.$color-muted;
+  padding: 40px 16px !important;
+  font-size: 14px;
+}
+
+/* ── CSS custom props for inline styles ──────────── */
+
+:root {
+  --muted: #{v.$color-muted};
+}
