@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Movimenti recenti del conto LipariBank."
+    />
+    <title>LipariBank — Movimenti</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__brand">
+        <span class="logo-icon">🏦</span>
+        <span class="logo-text">LipariBank</span>
+      </div>
+      <nav class="topbar__nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="transactions.html" class="nav-link nav-link--active"
+          >Movimenti</a
+        >
+        <a href="account.html" class="nav-link">Il mio conto</a>
+        <a href="login.html" class="nav-link">Esci</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <section class="page-header">
+        <h1 class="page-title">Movimenti</h1>
+        <button class="btn btn--primary">Nuovo bonifico</button>
+      </section>
+
+      <div class="table-wrapper">
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrizione</th>
+              <th>Categoria</th>
+              <th style="text-align: right">Importo</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsBody">
+            <tr>
+              <td colspan="4" class="state-loading">Caricamento…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script type="module" src="/src/transactions.ts"></script>
+  </body>
+</html>

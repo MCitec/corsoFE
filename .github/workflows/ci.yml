@@ -1,0 +1,121 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: TypeScript and ESLint
+    runs-on: ubuntu-latest
+    steps:
+      # Recupera il commit associato all'evento CI.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Configura Node e usa package-lock.json per la cache npm.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      # Installa versioni deterministiche senza modificare il lockfile.
+      - name: Install dependencies
+        run: npm ci
+      # Blocca la pipeline se il controllo TypeScript fallisce.
+      - name: TypeScript type-check
+        run: npm run type-check
+      # Blocca la pipeline se il codice non rispetta le regole ESLint.
+      - name: ESLint
+        run: npm run lint
+
+  build:
+    name: Vite build
+    runs-on: ubuntu-latest
+    needs: quality
+    steps:
+      # Recupera il codice già sottoposto ai controlli statici.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Configura Node con cache npm keyed by package-lock.json.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      # Installa le dipendenze bloccate prima della build.
+      - name: Install dependencies
+        run: npm ci
+      # Crea le pagine multi-page e gli asset Vite di produzione.
+      - name: Build application
+        run: npm run build
+      # Condivide dist con Lighthouse e deploy senza ricompilare.
+      - name: Upload production artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-build
+          path: dist
+          if-no-files-found: error
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # Recupera il commit da analizzare nel job Lighthouse.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Configura Node e cache npm per gli strumenti Lighthouse.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      # Usa esattamente l'artifact prodotto dal job build.
+      - name: Download production artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist
+      # Avvia un server statico per fornire le pagine all'audit.
+      - name: Start preview server
+        run: npx --yes serve@14 dist -l tcp://127.0.0.1:4173 > /tmp/lighthouse-server.log 2>&1 &
+      # Attende che la dashboard sia raggiungibile prima dell'audit.
+      - name: Wait for preview server
+        run: npx --yes wait-on@8 http://127.0.0.1:4173/dashboard.html
+      # Esegue Lighthouse CI; le soglie in .lighthouserc.json fanno fallire il job sotto 80.
+      - name: Run Lighthouse CI
+        run: npx --yes @lhci/cli@0.14.0 autorun
+
+  deploy-preview:
+    name: Netlify preview deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.deploy_url }}
+    steps:
+      # Recupera la build della PR da pubblicare.
+      - name: Download production artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-build
+          path: dist
+      # Usa solo Secrets GitHub per autenticare il deploy preview Netlify.
+      - name: Deploy preview to Netlify
+        id: deploy
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          test -n "$NETLIFY_AUTH_TOKEN"
+          test -n "$NETLIFY_SITE_ID"
+          deploy_output=$(npx --yes netlify-cli@17 deploy --dir=dist --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN" --json)
+          deploy_url=$(printf '%s' "$deploy_output" | node -e "let input=''; process.stdin.on('data', chunk => input += chunk); process.stdin.on('end', () => process.stdout.write(JSON.parse(input).deploy_url));")
+          echo "deploy_url=$deploy_url" >> "$GITHUB_OUTPUT"

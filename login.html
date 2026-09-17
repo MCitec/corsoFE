@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Accesso sicuro al portale LipariBank." />
+    <title>LipariBank - Accedi</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <main class="main-content">
+      <section class="account-card" aria-labelledby="login-title">
+        <p class="logo-text">LipariBank</p>
+        <h1 id="login-title" class="page-title">Accedi al tuo conto</h1>
+        <form class="login-form" action="dashboard.html" method="get">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            required
+          />
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+          <label
+            ><input type="checkbox" name="remember" /> Ricordami su questo
+            dispositivo</label
+          >
+          <button class="btn btn--primary" type="submit">Accedi</button>
+          <a href="#forgot-password">Password dimenticata?</a>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
