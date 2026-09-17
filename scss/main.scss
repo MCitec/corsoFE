@@ -1,5 +1,5 @@
-@use 'variables' as v;
-@use 'responsive';
+@use "variables" as v;
+@use "responsive";
 
 *,
 *::before,
@@ -10,7 +10,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: v.$color-bg;
   color: v.$color-text;
   font-size: 15px;
@@ -39,7 +39,9 @@ body {
   gap: 8px;
 }
 
-.logo-icon { font-size: 22px; }
+.logo-icon {
+  font-size: 22px;
+}
 
 .logo-text {
   font-size: 18px;
@@ -59,10 +61,15 @@ body {
   font-weight: 500;
   color: v.$color-muted;
   text-decoration: none;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
-.nav-link:hover { background: v.$color-bg; color: v.$color-text; }
+.nav-link:hover {
+  background: v.$color-bg;
+  color: v.$color-text;
+}
 
 .nav-link--active {
   color: v.$color-primary;
@@ -129,7 +136,9 @@ body {
   border-radius: v.$radius;
   padding: 24px;
   box-shadow: v.$shadow;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .account-card:hover {
@@ -196,7 +205,9 @@ body {
   font-size: 14px;
 }
 
-.transactions-table tr:last-child td { border-bottom: none; }
+.transactions-table tr:last-child td {
+  border-bottom: none;
+}
 
 /* ── Badge ───────────────────────────────────────── */
 
@@ -212,8 +223,14 @@ body {
 
 /* ── Amount colors ───────────────────────────────── */
 
-.amount--credit { color: v.$color-credit; font-weight: 600; }
-.amount--debit  { color: v.$color-debit;  font-weight: 600; }
+.amount--credit {
+  color: v.$color-credit;
+  font-weight: 600;
+}
+.amount--debit {
+  color: v.$color-debit;
+  font-weight: 600;
+}
 
 /* ── States ──────────────────────────────────────── */
 
